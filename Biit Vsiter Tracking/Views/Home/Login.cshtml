@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<html>
+<body>
+
+    <style>
+    </style>
+    <div class="row">
+        <div class="col-25">
+            <label for="fname">Name</label>
+        </div>
+        <div class="col-25">
+            <input type="text" id="name" name="name" placeholder="Your name..">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label for="lname">Password</label>
+        </div>
+        <div class="col-25">
+            <input type="password" id="password" name="password" placeholder="Your Password ..">
+        </div>
+    </div>
+   
+    <div class="row">
+        <input type="submit" value="Submit" onclick="submit()">
+    </div>
+
+</body>
+</html>
+<script>
+    async function submit() {
+        debugger
+        var name = document.getElementById("name").value
+        var password = document.getElementById("password").value
+       
+        const response = await fetch("http://127.0.0.1:1234/login", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                name: name,
+                password: password,
+               
+
+            })
+        });
+
+        response.json().then(data => {
+            console.log(data);
+            alert(JSON.stringify(data))
+        });
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

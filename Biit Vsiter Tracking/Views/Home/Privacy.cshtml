@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<html>
+<body onload="callapi()">
+    <style>
+        #visitordata {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .heading {
+            text-align: center;
+        }
+
+        #visitordata td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #visitordata tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #visitordata tr:hover {
+            background-color: #ddd;
+        }
+
+        #visitordata th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+
+    <h1 class="heading">Report Generation</h1>
+    <label for="birthdaytime">Date:</label>
+    <input type="date" id="dateselect" name="Select Date" onchange="check(event)" />
+    <table id="visitordata">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>destination</th>
+                <th>time</th>
+            </tr>
+        </thead>
+        <tbody id="#visitordata1">
+        </tbody>
+
+    </table>
+
+</body>
+<script>
+    //data api sa la raha ha
+    today = new Date();
+    let v_data = []
+
+    document.getElementById('dateselect').value = new Date().toISOString().substring(0, 10);
+    async function callapi() {
+        debugger;
+
+        await fetch('http://127.0.0.1:1234/get')
+            .then(data => {
+                return data.json();
+            }).then(post => {
+                v_data.push(post)
+            });
+        loadTableData(v_data)
+    }
+    //data push kr raha ha table ma
+    function loadTableData(items) {
+        debugger;
+        const table = document.getElementById("visitordata");
+        items.map(item => {
+            for (var i = 0; i < item.length; i++) {
+
+                let row = table.insertRow();
+
+                let name = row.insertCell();
+                name.innerHTML = item[i].name;
+                let destination = row.insertCell();
+                destination.innerHTML = item[i].destination;
+
+                let time = row.insertCell();
+                time.innerHTML = item[i].time;
+            }
+
+
+        });
+    }
+    function check(event) {
+        debugger;
+        for (var i = 1; i < document.getElementById("visitordata").length; i++) {
+            document.getElementById("visitordata").deleteRow(1);
+
+        }
+        var x = document.getElementById("dateselect");
+        var currentVal = x.value;
+        result = v_data.filter((d, index) => {
+            console.log(d[index])
+            return (currentVal = d[index].date);
+        });
+        loadTableData(result)
+    }
+
+
+</script>
+</html>
