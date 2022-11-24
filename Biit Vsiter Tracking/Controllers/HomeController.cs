@@ -18,12 +18,13 @@ namespace Biit_Vsiter_Tracking.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+       
+
+        public IActionResult Privacy()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
             return View();
         }
@@ -32,6 +33,10 @@ namespace Biit_Vsiter_Tracking.Controllers
             return View();
         }
         public IActionResult SignUp()
+        {
+            return View();
+        }
+        public IActionResult Alerts()
         {
             return View();
         }

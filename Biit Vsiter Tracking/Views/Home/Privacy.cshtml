@@ -99,6 +99,7 @@
         }
         var x = document.getElementById("dateselect");
         var currentVal = x.value;
+        let result = []
         result = v_data.filter((d, index) => {
             console.log(d[index])
             return (currentVal = d[index].date);

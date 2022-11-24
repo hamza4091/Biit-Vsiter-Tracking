@@ -1,148 +1,137 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Login";
 }
 <html>
 <body>
 
     <style>
-        {
-            box-sizing: border-box;
-        }
-
-        input[type=text], select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-        }
-
-        input[type=number], select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-        }
-
-        label {
-            padding: 12px 12px 12px 0;
-            display: inline-block;
-        }
-
-        input[type=submit] {
-            background-color: #04AA6D;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            float: right;
-        }
-
-            input[type=submit]:hover {
-                background-color: #45a049;
-            }
-
-        .pic {
-            border-radius: 5px;
-            padding: 20px;
-            margin-left: 20px;
-            width: 50px;
-            height: 500px;
-            float: left;
-        }
-
-        .container1 {
-            float: left;
-            border-radius: 5px;
-            padding: 20px;
-            width: 500px;
-            height: 500px;
-        }
-
-        .col-25 {
-            float: left;
-            width: 70%;
-            margin-top: 6px;
-        }
-
-
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            width: 250px;
-        }
+        .divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@*@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}*@
     </style>
-
-
-    <div class="container1">
-
-        <div class="row">
+    @*<div class="row">
             <div class="col-25">
                 <label for="fname">Name</label>
             </div>
             <div class="col-25">
-                <input type="text" id="name" name="firstname" placeholder="Your name..">
+                <input type="text" id="name" name="name" placeholder="Your name..">
             </div>
         </div>
         <div class="row">
             <div class="col-25">
-                <label for="lname">CNIC</label>
+                <label for="lname">Password</label>
             </div>
             <div class="col-25">
-                <input type="number" id="cnic" name="lastname" placeholder="Your CNIC ..">
+                <input type="password" id="password" name="password" placeholder="Your Password ..">
             </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="country">Destination</label>
-            </div>
-            <div class="col-25">
-                <select id="destination" name="country">
-                    <option value="hod">HOD</option>
-                    <option value="director">Director</option>
-                    <option value="datacell">DataCell</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="subject">Phone</label>
-            </div>
-            <div class="col-25">
-                <input type="number" id="phone" name="firstname" placeholder="Your phone..">
-            </div>
-        </div>
-        <div class="row">
-            <input type="submit" value="Submit" onclick="submit()">
         </div>
 
-    </div>
-    <div class="pic">
-        <button id="start-camera">Start Camera</button>
-        <video id="video" width="320" height="240" autoplay></video>
-        <button id="click-photo">Click Photo</button>
-        <canvas id="canvas" width="320" height="240"></canvas>
+        <div class="row">
+            <input type="submit" value="Submit" onclick="submit()">
+            <button type="button" class="btn btn-primary">Primary</button>
+        </div>
+    *@
+
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                         class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+
+
+
+                    <h1>LOGIN</h1>
+
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="name" class="form-control form-control-lg"
+                               placeholder="Enter a valid email address" />
+
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <input type="password" id="password" class="form-control form-control-lg"
+                               placeholder="Enter password" />
+
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Checkbox -->
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                            <label class="form-check-label" for="form2Example3">
+                                Remember me
+                            </label>
+                        </div>
+                        <a href="#!" class="text-body">Forgot password?</a>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="button" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="submit()">
+                            Login
+                        </button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">
+                            Don't have an account? <a href="#!"
+                                                      class="link-danger">Register</a>
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 <script>
-    let image_data_url = ""
-    function load() {
-        debugger;
-
-    }
     async function submit() {
+       window.location =  window.location.href + "Home/Login"
         debugger
-        var phone = document.getElementById("phone").value
         var name = document.getElementById("name").value
-        var cnic = document.getElementById("cnic").value
-        var destination = document.getElementById("destination").value
-        const response = await fetch("http://127.0.0.1:1234/insert", {
+        var password = document.getElementById("password").value
+
+        const response = await fetch("http://127.0.0.1:1234/login", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -150,54 +139,18 @@
             },
 
             body: JSON.stringify({
-                cnic: cnic,
-                destination: destination,
                 name: name,
-                phone: phone,
-                date: new Date(),
-                time: new Date().toLocaleTimeString(),
-                image: image_data_url
+                password: password,
+
 
             })
         });
 
         response.json().then(data => {
+            debugger;
             console.log(data);
-            alert(JSON.stringify(data))
+           // alert(JSON.stringify(data))
         });
 
     }
-    let camera_button = document.querySelector("#start-camera");
-    let video = document.querySelector("#video");
-    let click_button = document.querySelector("#click-photo");
-    let canvas = document.querySelector("#canvas");
-
-    camera_button.addEventListener('click', async function () {
-        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-        video.srcObject = stream;
-    });
-
-    click_button.addEventListener('click', function () {
-        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-        image_data_url = canvas.toDataURL('image/jpeg');
-
-        // data url of the image
-        console.log(image_data_url);
-    });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
