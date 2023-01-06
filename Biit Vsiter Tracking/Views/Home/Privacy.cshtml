@@ -34,24 +34,97 @@
             background-color: #04AA6D;
             color: white;
         }
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 240px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+            .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+                .sidebar a.active {
+                    background-color: #04AA6D;
+                    color: white;
+                }
+
+                .sidebar a:hover:not(.active) {
+                    background-color: #555;
+                    color: white;
+                }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+
+
+        .main1 {
+            padding: 20px;
+            width: 550px;
+            height: 450px;
+            float: left;
+            margin-left: 10px;
+        }
+
+
+
+        .dashboard {
+            width: 300px;
+            height: 550px;
+            margin-top: 10px;
+            float: left;
+        }
     </style>
+    <div class=" dashboard">
 
-    <h1 class="heading">Report Generation</h1>
-    <label for="birthdaytime">Date:</label>
-    <input type="date" id="dateselect" name="Select Date" onchange="check(event)" />
-    <table id="visitordata">
-        <thead>
-            <tr>
-                <th>name</th>
-                <th>destination</th>
-                <th>time</th>
-            </tr>
-        </thead>
-        <tbody id="#visitordata1">
-        </tbody>
+        <div class="sidebar">
+            <a href="/Home/AdminHomePage">DashBoard</a>
+            <a href="/Home/Privacy" class="active">Report Generation</a>
+            <a href="/Home/Alerts">Alert</a>
+            <a href="/Home/AddPerson">Add Person</a>
+            <a href="/Home/AddGuard">Add Guard</a>
+            <a href="/Home/AddPath">Add Path</a>
+            <a href="/Home/AddDestination">Add Destination</a>
+            <a href="/Home/AddCamera">Add Camera</a>
+            <a href="#about">LogOut</a>
+        </div>
 
-    </table>
+    </div>
+    <div class=" main1">
+        <h1 class="heading">Report Generation</h1>
+        <label for="birthdaytime">Date:</label>
+        <input type="date" id="dateselect" name="Select Date" onchange="check(event)" />
+        <table id="visitordata">
+            <thead>
+                <tr>
+                    <th>Visiter Name</th>
+                    <th>Destination</th>
+                    <th>TimeIn</th>
+                    <th> TimeOut</th>
+                   
+                </tr>
 
+            </thead>
+            <tbody id="#visitordata1">
+            </tbody>
+
+        </table>
+    </div>
 </body>
 <script>
     //data api sa la raha ha
@@ -84,8 +157,14 @@
                 let destination = row.insertCell();
                 destination.innerHTML = item[i].destination;
 
-                let time = row.insertCell();
-                time.innerHTML = item[i].time;
+                let timein = row.insertCell();
+                timein.innerHTML = item[i].timein;
+
+                let timeout = row.insertCell();
+                timeout.innerHTML = item[i].timeout;
+
+
+
             }
 
 

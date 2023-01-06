@@ -32,11 +32,44 @@ namespace Biit_Vsiter_Tracking.Controllers
         {
             return View();
         }
-        public IActionResult SignUp()
+        public IActionResult sign()
         {
             return View();
         }
         public IActionResult Alerts()
+        {
+            return View();
+        }
+        public IActionResult GuardAlertsScreen()
+        {
+            return View();
+        }
+        public IActionResult AdminHomePage()
+        {
+            return View();
+        }
+        public IActionResult AddPerson()
+        {
+            return View();
+        }
+        public IActionResult AddCamera()
+        {
+            return View();
+        }
+        public IActionResult AddPath()
+        {
+            return View();
+        }
+
+        public IActionResult AddGuard()
+        {
+            return View();
+        }
+        public IActionResult AddDestination()
+        {
+            return View();
+        }
+        public IActionResult CurrentVisiter()
         {
             return View();
         }

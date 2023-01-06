@@ -127,7 +127,7 @@ height: 100%;
 </html>
 <script>
     async function submit() {
-       
+        window.location = window.location.href + "Home/Login"
         debugger
         var name = document.getElementById("name").value
         var password = document.getElementById("password").value
@@ -149,22 +149,8 @@ height: 100%;
 
         response.json().then(data => {
             debugger;
-            if (data == "admin") {
-                window.location = window.location.href + "Home/AdminHomePage"
-            }
-            else if (data == "teacher") {
-              
-             
-
-            }
-            else if (data == "guard") {
-                window.location = window.location.href + "Home/Index"
-
-            }
-            else {
-
-            }
-            alert(JSON.stringify(data))
+            console.log(data);
+            // alert(JSON.stringify(data))
         });
 
     }

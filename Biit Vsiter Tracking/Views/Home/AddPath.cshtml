@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewData["Title"] = "AddPath";
+}
+<html>
+<body>
+
+    <style>
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+
+        .h-custom {
+            height: calc(100% - 73px);
+        }
+
+        .main1 {
+            padding: 20px;
+            width: 550px;
+            height: 450px;
+            float: left;
+            margin-left: 10px;
+        }
+
+
+
+        .dashboard {
+            width: 300px;
+            height: 550px;
+            margin-top: 10px;
+            float: left;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 240px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+            .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+                .sidebar a.active {
+                    background-color: #04AA6D;
+                    color: white;
+                }
+
+                .sidebar a:hover:not(.active) {
+                    background-color: #555;
+                    color: white;
+                }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+        }
+    </style>
+    @*<div class="row">
+            <div class="col-25">
+                <label for="fname">Name</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="name" name="name" placeholder="Your name..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">Password</label>
+            </div>
+            <div class="col-25">
+                <input type="password" id="password" name="password" placeholder="Your Password ..">
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Submit" onclick="submit()">
+            <button type="button" class="btn btn-primary">Primary</button>
+        </div>
+    *@
+
+    <div class=" dashboard">
+
+        <div class="sidebar">
+            <a href="/Home/AdminHomePage">DashBoard</a>
+            <a href="/Home/Privacy">Report Generation</a>
+            <a href="/Home/Alerts">Alert</a>
+            <a href="/Home/AddPerson">Add Person</a>
+            <a href="/Home/AddGuard">Add Guard</a>
+            <a href="/Home/AddPath" class="active">Add Path</a>
+            <a href="/Home/AddDestination">Add Destination</a>
+            <a href="/Home/AddCamera">Add Camera</a>
+            <a href="#about">LogOut</a>
+        </div>
+
+    </div>
+    <div class=" main1">
+
+
+        <h1>ADD PATH</h1>
+
+        <div class="form-outline mb-4">
+            <input type="email" id="name" class="form-control form-control-lg"
+                   placeholder="Enter PATH Name" />
+
+        </div>
+
+
+        <!-- Email input -->
+        <!--<div class="form-outline mb-4">
+            <input type="email" id="name" class="form-control form-control-lg"
+                   placeholder="Enter Email" />
+
+        </div>-->
+
+        <!-- Password input -->
+        <div class="form-outline mb-3">
+            <input type="password" id="password" class="form-control form-control-lg"
+                   placeholder="Enter " />
+
+        </div>
+
+       @* <div class="form-outline mb-4">
+            <input type="email" id="name" class="form-control form-control-lg"
+                   placeholder="Enter Destination" />
+
+        </div>*@
+
+
+
+
+        <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="button" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="submit()">
+                ADD
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    async function submit() {
+        window.location = window.location.href + "Home/Login"
+        debugger
+        var name = document.getElementById("name").value
+        var password = document.getElementById("password").value
+
+        const response = await fetch("http://127.0.0.1:1234/login", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                name: name,
+                password: password,
+
+
+            })
+        });
+
+        response.json().then(data => {
+            debugger;
+            console.log(data);
+            // alert(JSON.stringify(data))
+        });
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

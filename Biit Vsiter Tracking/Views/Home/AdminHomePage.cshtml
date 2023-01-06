@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Admin";
+}
+<html>
+<body>
+
+    <style>
+        .main1 {
+            padding: 20px;
+            border: 2px;
+            height: 450px;
+            float: left;
+            margin-left: 10px;
+        }
+        .dashboard {
+            width: 300px;
+            height: 550px;
+            margin-top: 10px;
+            float: left;
+        }
+    body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 240px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+.Data {
+            border: solid;
+            width: 200px;
+            height: 100px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            font-size: 20px;
+        }
+
+
+
+@*@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}**@
+    </style>
+
+
+
+
+    <div class=" dashboard">
+
+        <div class="sidebar">
+            <a class="active" href="/Home/AdminHomePage">DashBoard</a>
+            <a href="/Home/Privacy">Report Generation</a>
+            <a href="/Home/Alerts">Alert</a>
+            <a href="/Home/AddPerson">Add Person</a>
+            <a href="/Home/AddGuard">Add Guard</a>
+            <a href="/Home/AddPath">Add Path</a>
+            <a href="/Home/AddDestination">Add Destination</a>
+            <a href="/Home/AddCamera">Add Camera</a>
+            <a href="#about">LogOut</a>
+        </div>
+
+    </div>
+    @*<div class="vl"></div>*@
+<div class=" main1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="Data" style="
+                         text-align: center;
+                         background: #154c79;
+                         color: white;">
+                    <span style="font-size:25px">Current Visiter</span><br />
+                    <span style="font-size:25px">421</span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="Data" style="
+                         text-align: center;
+                         background: blue;
+                         color: white;">
+                    <span style="font-size:25px">Monthly Visiter</span><br />
+                    <span style="font-size:25px">12</span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="Data" style="
+                         text-align: center;
+                         background: green;
+                         color: white;">
+                    <span style="font-size:25px">Alerts</span><br />
+                    <span style="font-size:25px">21</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
+<script>
+     window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "Desktop Search Engine Market Share - 2016"
+            },
+            data: [{
+                type: "pie",
+                startAngle: 240,
+                yValueFormatString: "##0.00\"%\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    { y: 79.45, label: "Google" },
+                    { y: 7.31, label: "Bing" },
+                    { y: 7.06, label: "Baidu" },
+                    { y: 4.91, label: "Yahoo" },
+                    { y: 1.26, label: "Others" }
+                ]
+            }]
+        });
+        chart.render();
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

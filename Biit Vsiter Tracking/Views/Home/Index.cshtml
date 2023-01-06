@@ -1,137 +1,205 @@
-﻿@{
-    ViewData["Title"] = "Login";
+﻿
+
+@{
+    ViewData["Title"] = "Index";
 }
 <html>
 <body>
 
     <style>
-        .divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
-}
-.h-custom {
-height: calc(100% - 73px);
-}
-@*@media (max-width: 450px) {
-.h-custom {
-height: 100%;
-}
-}*@
+        {
+            box-sizing: border-box;
+        }
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .closebtn:hover {
+                color: black;
+            }
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=number], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .pic {
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 20px;
+            width: 50px;
+            height: 500px;
+            float: left;
+
+        }
+
+        .container1 {
+            width: 100%;
+            display: flex;
+            padding-left: 10px;
+        }
+
+        @* .col-25 {
+            float: left;
+            width: 70%;
+            margin-top: 1px;
+        }
+*@
+
+
+        /* Clear floats after the columns */
+     
+
     </style>
-    @*<div class="row">
-            <div class="col-25">
-                <label for="fname">Name</label>
-            </div>
-            <div class="col-25">
-                <input type="text" id="name" name="name" placeholder="Your name..">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="lname">Password</label>
-            </div>
-            <div class="col-25">
-                <input type="password" id="password" name="password" placeholder="Your Password ..">
-            </div>
-        </div>
 
-        <div class="row">
-            <input type="submit" value="Submit" onclick="submit()">
-            <button type="button" class="btn btn-primary">Primary</button>
-        </div>
-    *@
-
-    <section class="vh-100">
-        <div class="container-fluid h-custom">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                         class="img-fluid" alt="Sample image">
-                </div>
-                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-
-
-
-                    <h1>LOGIN</h1>
-
-
-                    <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <input type="email" id="name" class="form-control form-control-lg"
-                               placeholder="Enter a valid email address" />
-
-                    </div>
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-3">
-                        <input type="password" id="password" class="form-control form-control-lg"
-                               placeholder="Enter password" />
-
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                            <label class="form-check-label" for="form2Example3">
-                                Remember me
-                            </label>
-                        </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
-                    </div>
-
-                    <div class="text-center text-lg-start mt-4 pt-2">
-                        <button type="button" class="btn btn-primary btn-lg"
-                                style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="submit()">
-                            Login
-                        </button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">
-                            Don't have an account? <a href="#!"
-                                                      class="link-danger">Register</a>
-                        </p>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-    </section>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
+    @*  <div class="container1">
+        alert("Hamza is at wrong place")*@
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-        <div class="modal-dialog">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Capture Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <video id="video" width="400" height="400" autoplay></video>
+                    @* <canvas id="canvas" width="400" height="400"></canvas>*@
+                    <button type="button" class="btn btn-primary" id="click-photo" data-dismiss="modal">Click Photo</button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>
+    <h4> ADD VISITOR DATA</h4>
+    <div class="row" style="width: 55%;height:400px;float:left !important">
+
+        <div class="col">
+
+            <div class="form-outline mb-4">
+                <span class="label label-primary">Primary Label</span>
+                <input type="email" id="name" class="form-control form-control-lg"
+                       placeholder="Enter Name" />
+
+            </div>
+
+
+            <div class="form-outline mb-3">
+                <input type="password" id="phone" class="form-control form-control-lg"
+                       placeholder="Enter Phone Number" />
+
+            </div>
+            <div class="form-outline mb-4">
+                <input type="email" id="cnic" class="form-control form-control-lg"
+                       placeholder="Enter CNIC NUMBER" />
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Destination</label>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="d_admin" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_director" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Deputy Director</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_datacell" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Data Cell</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_datacell" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Finance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_datacell" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Director Office</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_datacell" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Sir Shahid faculty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_datacell" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Sir Umer faculty</a>
+                       
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="d_datacell" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Sir Zahid faculty</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+
+                @* <button id="start-camera" type="button" class="btn btn-primary">Start Camera</button>*@
+
+                <div class="col">
+                    <button id="start-camera" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                        TAKE PICTURE
+                    </button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" style="width:400px !important" onclick="submit()">Submit</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div style="border:2px solid; width:40%;height:400%;float:left">
+        <div style="width:10%; float:left;margin-left:20px">
+            <canvas id="canvas" width="100" height="150"></canvas>
+        </div>
+        <div style="width:20%; float:left;margin-left:60px">
+            <canvas id="canvas1" width="100" height="150"></canvas>
+        </div>
+
+    </div>
+
 </body>
 </html>
 <script>
-    async function submit() {
-       window.location =  window.location.href + "Home/Login"
-        debugger
-        var name = document.getElementById("name").value
-        var password = document.getElementById("password").value
 
-        const response = await fetch("http://127.0.0.1:1234/login", {
+    let image_data_url = ""
+    function load() {
+        debugger;
+
+    }
+    async function submit() {
+        debugger
+        
+        var phone = document.getElementById("phone").value
+        var name = document.getElementById("name").value
+        var cnic = document.getElementById("cnic").value
+        var destination = document.getElementById("d_admin").ariaSelected ? "Admin" : document.getElementById("d_director").ariaSelected ? "Director" : "Data Cell"
+        const response = await fetch("http://127.0.0.1:1234/insert", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -139,18 +207,44 @@ height: 100%;
             },
 
             body: JSON.stringify({
+                cnic: cnic,
+                destination: destination,
                 name: name,
-                password: password,
-
+                phone: phone,
+                date: new Date(),
+                time: new Date().toLocaleTimeString(),
+                image: image_data_url
 
             })
         });
 
         response.json().then(data => {
-            debugger;
             console.log(data);
-           // alert(JSON.stringify(data))
+            alert(JSON.stringify(data))
         });
 
     }
+    let camera_button = document.querySelector("#start-camera");
+    let video = document.querySelector("#video");
+    let click_button = document.querySelector("#click-photo");
+    let canvas = document.querySelector("#canvas");
+    let canvas1 = document.querySelector("#canvas");
+    camera_button.addEventListener('click', async function () {
+        debugger;
+        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = stream;
+    });
+
+    click_button.addEventListener('click', function () {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas1.getContext('2d').drawImage(video, 0, 0, canvas1.width, canvas1.height);
+
+        image_data_url = canvas.toDataURL('image/jpeg');
+        //  await navigator.mediaDevices.getUserMedia({ video: false, audio: false });
+        video.srcObject = null;
+        console.log("Vid off");
+        // data url of the image
+        console.log(image_data_url);
+    });
 </script>
+

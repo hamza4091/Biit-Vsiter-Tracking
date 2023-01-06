@@ -1,0 +1,329 @@
+﻿
+@{
+    ViewData["Title"] = "TeacherAvailable";
+}
+<html>
+<body>
+
+    <style>
+        .divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+
+ .main1 {
+            padding: 20px;
+
+            width: 500px;
+            height: 450px;
+            float: left;
+            margin-left: 10px;
+        }
+        .main2 {
+            padding: 7px;
+            width: 150px;
+            height: 450px;
+            float: left;
+        }
+
+
+
+ .dashboard {
+            width: 300px;
+            height: 550px;
+            margin-top: 10px;
+            float: left;
+
+
+        }
+
+
+ body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 240px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+        {
+            box-sizing: border-box;
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=number], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .pic {
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 20px;
+            width: 50px;
+            height: 500px;
+            float: left;
+        }
+
+    </style>
+    @*<div class="row">
+            <div class="col-25">
+                <label for="fname">Name</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="name" name="name" placeholder="Your name..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">Password</label>
+            </div>
+            <div class="col-25">
+                <input type="password" id="password" name="password" placeholder="Your Password ..">
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Submit" onclick="submit()">
+            <button type="button" class="btn btn-primary">Primary</button>
+        </div>
+    *@
+
+    <div class=" dashboard">
+
+        <div class="sidebar">
+            <a href="/Home/AdminHomePage">DashBoard</a>
+            <a href="/Home/Privacy">Report Generation</a>
+            <a href="/Home/Alerts">Alerts</a>
+            <a href="/Home/AddPerson" class="active">Add Person</a>
+            <a href="/Home/AddGuard">Add Guard</a>
+            <a href="/Home/AddPath">Add Path</a>
+            <a href="/Home/AddDestination">Add Destination</a>
+            <a href="/Home/AddCamera">Add Camera</a>
+
+            <a href="#about">LogOut</a>
+        </div>
+
+        
+
+    </div>
+    <div class=" main1">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Capture Photo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <video id="video" width="400" height="400" autoplay></video>
+                        @* <canvas id="canvas" width="400" height="400"></canvas>*@
+                        <button type="button" class="btn btn-primary" id="click-photo" data-dismiss="modal">Click Photo</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <h1>ADD PERSON</h1>
+
+        <div class="form-outline mb-4">
+            <input type="email" id="name" class="form-control form-control-lg"
+                   placeholder="Enter Name" />
+
+        </div>
+
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="email" id="email" class="form-control form-control-lg"
+                   placeholder="Enter Email" />
+
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-3">
+            <input type="password" id="password" class="form-control form-control-lg"
+                   placeholder="Enter password" />
+
+        </div>
+
+        <div class="form-outline mb-4">
+            <select name="designation" id="designation" form="designation">
+                <option value="d_director">Deputy Director</option>
+                <option value="director">Director</option>
+                <option value="datacell">Data Cell</option>
+                <option value="admin">Admin</option>
+            </select>
+
+
+        </div>
+        <div class="col">
+            <button id="start-camera" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                Take PIC
+            </button>
+        </div>
+
+
+
+        <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="button" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="submit()">
+                Save
+            </button>
+
+        </div>
+        <div style="width:10px"></div>
+        <div style="width:40%">
+            <canvas id="canvas" width="400" height="450"></canvas>
+        </div>
+
+    </div>
+               
+            
+   @* <div class="main2"></div>  *@     
+        
+        
+
+</body>
+</html>
+<script>
+    let camera_button = document.querySelector("#start-camera");
+    let video = document.querySelector("#video");
+    let click_button = document.querySelector("#click-photo");
+    let canvas = document.querySelector("#canvas");
+    camera_button.addEventListener('click', async function () {
+        debugger;
+        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = stream;
+    });
+
+    click_button.addEventListener('click', function () {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        image_data_url = canvas.toDataURL('image/jpeg');
+        //  await navigator.mediaDevices.getUserMedia({ video: false, audio: false });
+        video.srcObject = null;
+        console.log("Vid off");
+        // data url of the image
+        console.log(image_data_url);
+    });
+
+
+
+
+    async function submit() {
+        debugger
+        var name = document.getElementById("name").value
+        var password = document.getElementById("password").value
+        var email = document.getElementById("email").value
+        const response = await fetch("http://127.0.0.1:1234/signup", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({
+                name: name,
+                password: password,
+                designation: "Teacher",
+                email: email,
+                image: image_data_url
+
+            })
+        });
+
+        response.json().then(data => {
+
+            console.log(data);
+            alert(JSON.stringify(data))
+        });
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
