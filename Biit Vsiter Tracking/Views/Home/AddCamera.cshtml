@@ -119,31 +119,19 @@
         <h1>ADD Camera</h1>
 
         <div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
+            <input type="text" id="camera" class="form-control form-control-lg"
                    placeholder="Enter Camera Name" />
 
         </div>
 
-
-        <!-- Email input -->
-        <!--<div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Email" />
-
-        </div>-->
-
-        <!-- Password input -->
         <div class="form-outline mb-3">
-            <input type="password" id="password" class="form-control form-control-lg"
+            <input type="text" id="uri" class="form-control form-control-lg"
                    placeholder="Enter URI" />
 
         </div>
+    </div>
 
-       @* <div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Destination" />
-
-        </div>*@
+    
 
 
 
@@ -165,83 +153,49 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 </body>
 </html>
 <script>
-    async function submit() {
-        window.location = window.location.href + "Home/Login"
-        debugger
-        var name = document.getElementById("name").value
-        var password = document.getElementById("password").value
+    async function callapi() {
+        debugger;
 
-        const response = await fetch("http://127.0.0.1:1234/login", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify({
-                name: name,
-                password: password,
-
-
-            })
-        });
-
-        response.json().then(data => {
-            debugger;
-            console.log(data);
-            // alert(JSON.stringify(data))
-        });
-
+        await fetch('http://127.0.0.1:1234/get')
+            .then(res => {
+                return res.json();
+            }).then(data => {
+                console.log(data)
+            });
+        
     }
+   
+        async function submit() {
+
+            debugger
+            var camera = document.getElementById("camera").value
+            var uri = document.getElementById("uri").value
+
+            const response = await fetch("http://127.0.0.1:1234/addcamera", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    camera: camera,
+                    uri: uri,
+
+
+                })
+            });
+
+            response.json().then(data => {
+                debugger;
+                console.log(data);
+                // alert(JSON.stringify(data))
+            });
+
+        }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

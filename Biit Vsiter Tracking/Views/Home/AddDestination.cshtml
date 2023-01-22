@@ -20,10 +20,17 @@
 
         .main1 {
             padding: 20px;
-            width: 550px;
+            width: 500px;
             height: 450px;
             float: left;
             margin-left: 10px;
+        }
+
+        .main2 {
+            padding: 7px;
+            width: 150px;
+            height: 450px;
+            float: left;
         }
 
 
@@ -73,6 +80,39 @@
             padding: 1px 16px;
             height: 1000px;
         }
+
+        {
+            box-sizing: border-box;
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=number], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .pic {
+            border-radius: 5px;
+            padding: 20px;
+            margin-left: 20px;
+            width: 50px;
+            height: 500px;
+            float: left;
         }
     </style>
     @*<div class="row">
@@ -103,95 +143,113 @@
         <div class="sidebar">
             <a href="/Home/AdminHomePage">DashBoard</a>
             <a href="/Home/Privacy">Report Generation</a>
-            <a href="/Home/Alerts">Alert</a>
-            <a href="/Home/AddPerson">Add Person</a>
+            <a href="/Home/Alerts">Alerts</a>
+            <a href="/Home/AddPerson" >Add Person</a>
             <a href="/Home/AddGuard">Add Guard</a>
             <a href="/Home/AddPath">Add Path</a>
             <a href="/Home/AddDestination" class="active">Add Destination</a>
-            <a href="/Home/AddCamera" >Add Camera</a>
+            <a href="/Home/AddCamera">Add Camera</a>
+
             <a href="#about">LogOut</a>
         </div>
 
+
+
     </div>
     <div class=" main1">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Capture Photo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <video id="video" width="400" height="400" autoplay></video>
+                        @* <canvas id="canvas" width="400" height="400"></canvas>*@
+                        <button type="button" class="btn btn-primary" id="click-photo" data-dismiss="modal">Click Photo</button>
+                    </div>
 
+                </div>
+            </div>
+        </div>
 
         <h1>ADD Destination</h1>
 
         <div class="form-outline mb-4">
             <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Destination ID" />
+                   placeholder="Destination Name" />
 
         </div>
 
 
-        <!-- Email input -->
-        <!--<div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Email" />
 
-        </div>-->
 
-        <!-- Password input -->
-        <div class="form-outline mb-3">
-            <input type="password" id="password" class="form-control form-control-lg"
-                   placeholder="Enter Destination Name" />
+     
+        <div class="form-outline mb-4">
+            <select name="designation" id="designation" form="designation">
+                <option value="d_director">Cam1</option>
+                <option value="director">Cam2</option>
+                <option value="datacell">Cam2</option>
+                <option value="admin">Cam2</option>
+            </select>
+
 
         </div>
-
-       @* <div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Destination" />
-
-        </div>*@
-
+        
 
 
 
         <div class="text-center text-lg-start mt-4 pt-2">
             <button type="button" class="btn btn-primary btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="submit()">
-                ADD
+                Save
             </button>
 
         </div>
-
+        
 
     </div>
 
 
+    @* <div class="main2"></div>  *@
 
 
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
 <script>
+    let camera_button = document.querySelector("#start-camera");
+    let video = document.querySelector("#video");
+    let click_button = document.querySelector("#click-photo");
+    let canvas = document.querySelector("#canvas");
+    camera_button.addEventListener('click', async function () {
+        debugger;
+        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = stream;
+    });
+
+    click_button.addEventListener('click', function () {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        image_data_url = canvas.toDataURL('image/jpeg');
+        //  await navigator.mediaDevices.getUserMedia({ video: false, audio: false });
+        video.srcObject = null;
+        console.log("Vid off");
+        // data url of the image
+        console.log(image_data_url);
+    });
+
+
+
+
     async function submit() {
-        window.location = window.location.href + "Home/Login"
         debugger
         var name = document.getElementById("name").value
         var password = document.getElementById("password").value
-
-        const response = await fetch("http://127.0.0.1:1234/login", {
+        var email = document.getElementById("email").value
+        const response = await fetch("http://127.0.0.1:1234/signup", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -201,19 +259,22 @@
             body: JSON.stringify({
                 name: name,
                 password: password,
-
+                designation: "Teacher",
+                email: email,
+                image: image_data_url
 
             })
         });
 
         response.json().then(data => {
-            debugger;
+
             console.log(data);
-            // alert(JSON.stringify(data))
+            alert(JSON.stringify(data))
         });
 
     }
 </script>
+
 
 
 

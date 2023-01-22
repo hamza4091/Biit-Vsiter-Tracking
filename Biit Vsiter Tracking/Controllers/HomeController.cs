@@ -73,6 +73,10 @@ namespace Biit_Vsiter_Tracking.Controllers
         {
             return View();
         }
+        public IActionResult Teacheravailable()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

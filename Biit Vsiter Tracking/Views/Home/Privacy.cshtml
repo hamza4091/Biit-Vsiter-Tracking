@@ -108,6 +108,8 @@
     <div class=" main1">
         <h1 class="heading">Report Generation</h1>
         <label for="birthdaytime">Date:</label>
+        <input type="month" id="bdaymonth" name="bdaymonth">
+
         <input type="date" id="dateselect" name="Select Date" onchange="check(event)" />
         <table id="visitordata">
             <thead>
@@ -116,7 +118,7 @@
                     <th>Destination</th>
                     <th>TimeIn</th>
                     <th> TimeOut</th>
-                   
+
                 </tr>
 
             </thead>
@@ -132,6 +134,7 @@
     let v_data = []
 
     document.getElementById('dateselect').value = new Date().toISOString().substring(0, 10);
+    document.getElementById('bdaymonth').value;
     async function callapi() {
         debugger;
 

@@ -75,31 +75,9 @@
         }
         }
     </style>
-    @*<div class="row">
-            <div class="col-25">
-                <label for="fname">Name</label>
-            </div>
-            <div class="col-25">
-                <input type="text" id="name" name="name" placeholder="Your name..">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-                <label for="lname">Password</label>
-            </div>
-            <div class="col-25">
-                <input type="password" id="password" name="password" placeholder="Your Password ..">
-            </div>
-        </div>
 
-        <div class="row">
-            <input type="submit" value="Submit" onclick="submit()">
-            <button type="button" class="btn btn-primary">Primary</button>
-        </div>
-    *@
 
     <div class=" dashboard">
-
         <div class="sidebar">
             <a href="/Home/AdminHomePage">DashBoard</a>
             <a href="/Home/Privacy">Report Generation</a>
@@ -117,101 +95,103 @@
 
 
         <h1>ADD PATH</h1>
+        <div id="container" style="border:2px">
+            <button onclick="submit()">Submit</button>
 
-        <div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter PATH Name" />
-
-        </div>
-
-
-        <!-- Email input -->
-        <!--<div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Email" />
-
-        </div>-->
-
-        <!-- Password input -->
-        <div class="form-outline mb-3">
-            <input type="password" id="password" class="form-control form-control-lg"
-                   placeholder="Enter " />
-
-        </div>
-
-       @* <div class="form-outline mb-4">
-            <input type="email" id="name" class="form-control form-control-lg"
-                   placeholder="Enter Destination" />
-
-        </div>*@
-
-
-
-
-        <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="submit()">
-                ADD
-            </button>
-
-        </div>
-
-
-    </div>
-
-
-
-
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
 <script>
+    var cameras = []
+    async function generateRandomFields() {
+        await fetch('http://127.0.0.1:1234/getcamera')
+            .then(res => {
+                return res.json();
+            }).then(data => {
+                data.map((value, index) => {
+                    cameras.push(value.camera)
+                })
+
+            });
+        @*    var cameras = ["cam1", "cam2", "cam3", "cam4", "cam5"];*@
+        var count = cameras.length;
+        var container = document.getElementById("container");
+
+        // create table element
+        var table = document.createElement("table");
+
+        //create first row for column names
+        var firstRow = document.createElement("tr");
+        var srnoCell = document.createElement("td");
+        srnoCell.innerHTML = "___";
+        firstRow.appendChild(srnoCell);
+        for (var i = 0; i < count; i++) {
+            var firstRowCell = document.createElement("td");
+            firstRowCell.innerHTML = cameras[i];
+            firstRow.appendChild(firstRowCell);
+        }
+        table.appendChild(firstRow);
+        for (var i = 0; i < count; i++) {
+            // create row element
+            var row = document.createElement("tr");
+            var srnoRowCell = document.createElement("td");
+            srnoRowCell.innerHTML = cameras[i];
+            row.appendChild(srnoRowCell);
+            for (var j = 0; j < count; j++) {
+                // create cell element
+                var cell = document.createElement("td");
+                // create input element
+                var input = document.createElement("input");
+                input.type = "text";
+                input.id = i + "" + j;
+                input.style.width = "100px";
+                // append input element to cell element
+                cell.appendChild(input);
+                // append cell element to row element
+                row.appendChild(cell);
+            }
+            // append row element to table element
+            table.appendChild(row);
+
+            container.appendChild(table);
+            container.style.overflow = "auto";
+
+            container.style.height = "300px";
+            container.style.width = "500px";
+        }
+    }
+
+    // append table element to container
+    generateRandomFields()
     async function submit() {
-        window.location = window.location.href + "Home/Login"
-        debugger
-        var name = document.getElementById("name").value
-        var password = document.getElementById("password").value
+        var value = makeArrayOfPaths()
+       const response = await fetch("http://127.0.0.1:1234/addpath", {
+           method: 'POST',
+           headers: {
+               'Accept': 'application/json',
+               'Content-Type': 'application/json'
+           },
 
-        const response = await fetch("http://127.0.0.1:1234/login", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+           body: JSON.stringify({
+               path: value
 
-            body: JSON.stringify({
-                name: name,
-                password: password,
+           })
+       });
 
-
-            })
-        });
-
-        response.json().then(data => {
-            debugger;
-            console.log(data);
-            // alert(JSON.stringify(data))
-        });
-
+       response.json().then(data => {
+           console.log(data);
+           alert(JSON.stringify(data))
+       });
+    }
+    function makeArrayOfPaths() {
+        var paths = [] 
+        for (var i = 0; i < cameras.length; i++) {
+            for (var j = 0; j < cameras.length; j++) {
+                debugger;
+                paths.push({ [cameras[i] + "TO" + cameras[j]]: document.getElementById(i + "" + j).value });
+            }
+        }
+        console.log(paths)
+        return JSON.stringify(paths)
     }
 </script>
 
